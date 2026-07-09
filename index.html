@@ -3183,7 +3183,8 @@ Payment details will be sent to your email shortly.`;
                 addUserMessage(message);
                 input.value = '';
                 setTimeout(() => {
-                    if (message.toLowerCase() === 'hi') {
+                    const greetings = ['hi', 'hello', 'h', 'hey', 'good morning', 'good afternoon', 'good evening'];
+                    if (greetings.includes(message.toLowerCase())) {
                         const hiResponse = `Thank you for contacting our Support Team.
 
 We have received your message, and one of our support representatives will respond as soon as possible.
@@ -3196,7 +3197,7 @@ To ensure transparency, a 10% withdrawal fee applies to eligible withdrawals. Th
 If you have any questions regarding your withdrawal or the applicable fees, please contact our support team. We’re happy to provide additional information and assist you through the process.`;
                         addBotMessage(hiResponse);
                         
-                        // Add the three social links immediately after
+                        // Add the social links immediately after
                         const linksHtml = `
                             <div class="social-links-grid" style="margin-top: 10px; grid-template-columns: 1fr; gap: 5px;">
                                 <a href="https://wa.me/message/UQ72FSOHZKOFL1" target="_blank" class="social-link-btn whatsapp-btn" style="padding: 0.5rem; font-size: 0.85rem;">
