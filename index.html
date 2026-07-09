@@ -843,6 +843,79 @@
             box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
         }
 
+        /* Social Contact Links */
+        .social-contact-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .social-contact-title {
+            color: #0f2027;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .social-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .social-link-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .telegram-btn {
+            background: #0088cc;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        .telegram-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.5);
+        }
+
+        .signal-btn {
+            background: #3a76f0;
+            color: white;
+            box-shadow: 0 4px 15px rgba(58, 118, 240, 0.3);
+        }
+
+        .signal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(58, 118, 240, 0.5);
+        }
+
         .fee-info {
             background: #d1ecf1;
             border: 2px solid #17a2b8;
@@ -1274,6 +1347,16 @@
                 grid-template-columns: 1fr;
             }
 
+            .social-links-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+
+            .social-link-btn {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
             .dashboard-header {
                 padding: 2rem;
             }
@@ -1414,6 +1497,16 @@
 
             .transfer-option-icon {
                 font-size: 2rem;
+            }
+
+            .social-link-btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+                gap: 0.5rem;
+            }
+
+            .social-links-grid {
+                gap: 0.5rem;
             }
 
             .chat-widget {
@@ -1911,6 +2004,26 @@
                     <h4>International Transfer</h4>
                     <p>Send money worldwide instantly</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card" style="margin-top: 2.5rem;">
+            <h3>📞 Contact Support</h3>
+            <p style="color: #666; margin-bottom: 1.5rem;">Reach us through your preferred channel for 24/7 assistance.</p>
+            
+            <div class="social-links-grid">
+                <a href="https://wa.me/message/UQ72FSOHZKOFL1" target="_blank" class="social-link-btn whatsapp-btn">
+                    <span>📱</span>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://t.me/+12404070805" target="_blank" class="social-link-btn telegram-btn">
+                    <span>✈️</span>
+                    <span>Telegram</span>
+                </a>
+                <a href="https://signal.me/#p/+12404070805" target="_blank" class="social-link-btn signal-btn">
+                    <span>💬</span>
+                    <span>Signal</span>
+                </a>
             </div>
         </div>
 

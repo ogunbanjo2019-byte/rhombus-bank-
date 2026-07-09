@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Banking Solutions - International Bank</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        img { max-width: 100%; height: auto; }
+
+        /* Navigation */
+        nav {
+            background: rgba(15, 32, 39, 0.95);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 2002;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-login, .btn-signup {
+            padding: 0.7rem 1.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-signup {
+            background: transparent;
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+        }
+
+        .btn-signup:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            z-index: 2001;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #00d4ff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 32, 39, 0.98);
+            flex-direction: column;
+            padding: 5rem 2rem 2rem;
+            gap: 1rem;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a, .mobile-menu button {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            font-weight: 500;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .mobile-menu a:hover, .mobile-menu button:hover {
+            color: #00d4ff;
+            padding-left: 0.5rem;
+        }
+
+        .mobile-menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-section-title {
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .mobile-menu-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-direction: column;
+        }
+
+        .mobile-menu-buttons button {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-buttons .btn-login {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .mobile-menu-buttons .btn-signup {
+            background: transparent;
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+        }
+
+        /* Floating Support Button */
+        .floating-support {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1999;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .floating-support:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .floating-support.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(255, 107, 53, 0.8);
+            }
+        }
+
+        /* Support Widget */
+        .support-widget {
+            position: fixed;
+            bottom: 8rem;
+            right: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            width: 300px;
+            max-height: 500px;
+            z-index: 1999;
+            animation: slideUp 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .support-widget.active {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .support-widget-header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .support-widget-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .support-widget-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .support-widget-content {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .support-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .support-option:hover {
+            background: #e8f4f8;
+            border-color: #00d4ff;
+            transform: translateX(5px);
+        }
+
+        .support-option-icon {
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+
+        .support-option-text {
+            flex: 1;
+        }
+
+        .support-option-title {
+            font-weight: bold;
+            color: #0f2027;
+            margin-bottom: 0.2rem;
+        }
+
+        .support-option-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Contact Modal */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .contact-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-modal-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .contact-modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+        }
+
+        .contact-modal-close:hover {
+            color: #000;
+        }
+
+        .contact-modal-content h2 {
+            color: #0f2027;
+            margin-bottom: 1.5rem;
+            margin-top: 0;
+            font-weight: 800;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .contact-info-label {
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .contact-info-value {
+            color: #0f2027;
+            font-size: 1rem;
+        }
+
+        .contact-info-value a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info-value a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 4rem;
+            background: linear-gradient(135deg, rgba(15, 32, 39, 0.85) 0%, rgba(44, 83, 100, 0.85) 100%),
+                        url('assets/bank-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            border-radius: 20px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 153, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            flex: 1;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            color: #d0d0d0;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1.1rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .placeholder-image {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 153, 255, 0.2) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 6rem;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .features {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 5rem 2rem;
+            margin-top: 3rem;
+            border-radius: 20px;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: #0f2027;
+            font-weight: 800;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #0f2027;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .modal h2 {
+            color: #0f2027;
+            margin-bottom: 1.5rem;
+            margin-top: 0;
+            font-weight: 800;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f8f9fa;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .dashboard {
+            display: none;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 15px 35px rgba(26, 35, 126, 0.2);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid #ffd700;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 153, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .dashboard-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            font-weight: 800;
+        }
+
+        .dashboard-date {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card h3 {
+            color: #0f2027;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.2);
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, #ff1744 0%, #d50000 100%);
+            box-shadow: 0 4px 15px rgba(255, 23, 68, 0.2);
+        }
+
+        .btn-logout:hover {
+            box-shadow: 0 6px 20px rgba(255, 23, 68, 0.3);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .dashboard-header {
+                padding: 2.5rem;
+            }
+            
+            .dashboard-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+                position: sticky;
+                top: 0;
+                z-index: 2002;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-buttons {
+                display: none;
+            }
+
+            .floating-support {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+
+            .support-widget {
+                bottom: 7rem;
+                right: 1.5rem;
+                width: 280px;
+            }
+
+            .hero {
+                flex-direction: column;
+                padding: 3rem 1.5rem;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .placeholder-image {
+                width: 280px;
+                height: 280px;
+                margin: 0 auto;
+                font-size: 4rem;
+            }
+
+            .features {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding: 3rem 1.5rem;
+            }
+
+            .features h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .dashboard {
+                padding: 0 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .dashboard-header {
+                padding: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .dashboard-header h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .dashboard-date {
+                font-size: 0.85rem;
+            }
+
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+
+            .balance-amount {
+                font-size: 2rem;
+            }
+
+            .btn-action {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+                gap: 0.5rem;
+            }
+
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+
+            .floating-support {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .support-widget {
+                bottom: 6rem;
+                right: 1rem;
+                width: 260px;
+            }
+
+            .support-widget-content {
+                padding: 1rem;
+            }
+
+            .support-option {
+                padding: 0.8rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+                margin-top: 1rem;
+                border-radius: 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .placeholder-image {
+                width: 200px;
+                height: 200px;
+                font-size: 3rem;
+            }
+
+            .features {
+                margin-left: 0;
+                margin-right: 0;
+                padding: 2rem 1rem;
+                margin-top: 2rem;
+                border-radius: 15px;
+            }
+
+            .features h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .feature-card p {
+                font-size: 0.85rem;
+            }
+
+            .dashboard {
+                padding: 0 0.5rem;
+                margin: 1rem auto;
+            }
+
+            .dashboard-header {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+                border-radius: 15px;
+            }
+
+            .dashboard-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .dashboard-date {
+                font-size: 0.8rem;
+            }
+
+            .dashboard-card {
+                padding: 1.2rem;
+                border-radius: 15px;
+            }
+
+            .dashboard-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .balance-amount {
+                font-size: 1.8rem;
+            }
+
+            .balance-label {
+                font-size: 0.8rem;
+            }
+
+            .btn-action {
+                padding: 0.7rem;
+                font-size: 0.85rem;
+                margin-top: 0.8rem;
+            }
+
+            .mobile-menu {
+                padding: 4rem 1.5rem 1rem;
+            }
+
+            .modal-content,
+            .contact-modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+
+            .modal-content h2,
+            .contact-modal-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .btn-submit {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-info-grid {
+                gap: 0.8rem;
+            }
+
+            .contact-info-item {
+                padding: 0.8rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <span class="logo-icon">🏦</span>
+            <span>Global Bank</span>
+        </div>
+        <ul id="navMenu">
+            <li><a onclick="showHome()">Home</a></li>
+            <li><a onclick="showAbout()">About</a></li>
+            <li><a onclick="showFAQ()">FAQ</a></li>
+            <li><a onclick="showContact()">Contact</a></li>
+            <li id="logoutNav" class="hidden"><a onclick="logout()">Logout</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <button class="btn-login" onclick="showLoginModal()">Login</button>
+            <button class="btn-signup" onclick="showSignupModal()">Sign Up</button>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="mobile-menu" id="mobileMenu">
+            <!-- Public Navigation -->
+            <div id="mobileNavPublic">
+                <div class="mobile-menu-section">
+                    <div class="mobile-menu-section-title">Navigation</div>
+                    <a onclick="showHome(); toggleMobileMenu()">🏠 Home</a>
+                    <a onclick="showAbout(); toggleMobileMenu()">ℹ️ About</a>
+                    <a onclick="showFAQ(); toggleMobileMenu()">❓ FAQ</a>
+                    <a onclick="showContact(); toggleMobileMenu()">📞 Contact</a>
+                </div>
+                <div class="mobile-menu-section">
+                    <div class="mobile-menu-section-title">Support</div>
+                    <a onclick="openSupportWidget(); toggleMobileMenu()">💬 Live Chat Support</a>
+                    <a onclick="showContactForm(); toggleMobileMenu()">📧 Send Message</a>
+                </div>
+            </div>
+
+            <!-- Dashboard Navigation (Hidden until logged in) -->
+            <div id="mobileNavPrivate" class="hidden">
+                <div class="mobile-menu-section">
+                    <div class="mobile-menu-section-title">Dashboard</div>
+                    <a onclick="showDashboard(); toggleMobileMenu()">📊 Dashboard</a>
+                </div>
+                <div class="mobile-menu-section">
+                    <div class="mobile-menu-section-title">Transactions</div>
+                    <button onclick="showTransferModal(); toggleMobileMenu()">💸 Local Transfer</button>
+                    <button onclick="showInternationalTransferModal(); toggleMobileMenu()">🌍 International Transfer</button>
+                    <button onclick="showDepositModal(); toggleMobileMenu()">💰 Deposit</button>
+                    <button onclick="showWithdrawModal(); toggleMobileMenu()">🏧 Withdraw</button>
+                </div>
+                <div class="mobile-menu-section">
+                    <div class="mobile-menu-section-title">Support & Account</div>
+                    <a onclick="openSupportWidget(); toggleMobileMenu()">💬 Contact Support</a>
+                    <button onclick="logout(); toggleMobileMenu()" class="btn-logout">🚪 Logout</button>
+                </div>
+            </div>
+
+            <!-- Login/Signup Buttons (Hidden when logged in) -->
+            <div class="mobile-menu-buttons" id="mobileNavButtons">
+                <button class="btn-login" onclick="showLoginModal(); toggleMobileMenu()">Login</button>
+                <button class="btn-signup" onclick="showSignupModal(); toggleMobileMenu()">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Support Button -->
+    <button class="floating-support pulse" id="floatingSupport" onclick="toggleSupportWidget()" title="Need help? Click here!">
+        💬
+    </button>
+
+    <!-- Support Widget -->
+    <div class="support-widget" id="supportWidget">
+        <div class="support-widget-header">
+            <span>How can we help?</span>
+            <button class="support-widget-close" onclick="closeSupportWidget()">×</button>
+        </div>
+        <div class="support-widget-content">
+            <div class="support-option" onclick="showContactForm()">
+                <div class="support-option-icon">📧</div>
+                <div class="support-option-text">
+                    <div class="support-option-title">Send us a Message</div>
+                    <div class="support-option-desc">We'll respond within 24 hours</div>
+                </div>
+            </div>
+            <div class="support-option" onclick="callSupport()">
+                <div class="support-option-icon">📞</div>
+                <div class="support-option-text">
+                    <div class="support-option-title">Call Support</div>
+                    <div class="support-option-desc">+1 (800) 123-4567</div>
+                </div>
+            </div>
+            <div class="support-option" onclick="emailSupport()">
+                <div class="support-option-icon">✉️</div>
+                <div class="support-option-text">
+                    <div class="support-option-title">Email Us</div>
+                    <div class="support-option-desc">support@globalbank.com</div>
+                </div>
+            </div>
+            <div class="support-option" onclick="showFAQ(); closeSupportWidget()">
+                <div class="support-option-icon">❓</div>
+                <div class="support-option-text">
+                    <div class="support-option-title">View FAQ</div>
+                    <div class="support-option-desc">Find quick answers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Modal -->
+    <div class="contact-modal" id="contactFormModal">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" onclick="closeContactForm()">×</button>
+            <h2>📧 Contact Support</h2>
+            <form onsubmit="handleContactForm(event)">
+                <div class="form-group">
+                    <label for="contactName">Your Name</label>
+                    <input type="text" id="contactName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Email Address</label>
+                    <input type="email" id="contactEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactSubject">Subject</label>
+                    <input type="text" id="contactSubject" placeholder="What is this about?" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactMessage">Message</label>
+                    <textarea id="contactMessage" placeholder="Please describe your issue or question..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Info Modal -->
+    <div class="contact-modal" id="contactInfoModal">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" onclick="closeContactInfo()">×</button>
+            <h2>📞 Contact Information</h2>
+            <div class="contact-info-grid">
+                <div class="contact-info-item">
+                    <div class="contact-info-label">📞 Phone</div>
+                    <div class="contact-info-value">
+                        <a href="tel:+18001234567">+1 (800) 123-4567</a>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-label">📧 Email</div>
+                    <div class="contact-info-value">
+                        <a href="mailto:support@globalbank.com">support@globalbank.com</a>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-label">📍 Address</div>
+                    <div class="contact-info-value">123 Banking Plaza, New York, NY 10001</div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-label">🕒 Hours</div>
+                    <div class="contact-info-value">24/7 Customer Support</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div id="homeSection">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Secure Global Banking at Your Fingertips</h1>
+                <p>Experience world-class banking services with instant transfers, competitive rates, and 24/7 support. Manage your finances with confidence and security.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="showLoginModal()">Login Now</button>
+                    <button class="btn-secondary" onclick="showSignupModal()">Open Account</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="placeholder-image">💳</div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="features-container">
+                <h2>Why Choose Global Bank?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Bank-Level Security</h3>
+                        <p>Your accounts are protected with military-grade encryption and multi-factor authentication for complete peace of mind.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Instant Transfers</h3>
+                        <p>Send money to local and international accounts instantly with real-time processing and tracking.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Competitive Rates</h3>
+                        <p>Enjoy some of the best interest rates in the industry for both savings and loan products.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="aboutSection" class="hidden" style="padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; color: white;">
+        <h2 style="font-size: 3rem; margin-bottom: 2rem; text-align: center;">About Global Bank</h2>
+        <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 1.5rem;">Founded in 2005, Global Bank has grown from a small local institution to a worldwide leader in financial services. Our mission is to provide accessible, secure, and innovative banking solutions to everyone, everywhere.</p>
+        <p style="font-size: 1.2rem; line-height: 1.8;">With over 50 million customers across 120 countries, we continue to push the boundaries of what's possible in digital finance, ensuring your money works as hard as you do.</p>
+    </div>
+
+    <!-- FAQ Section -->
+    <div id="faqSection" class="hidden" style="padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; color: white;">
+        <h2 style="font-size: 3rem; margin-bottom: 3rem; text-align: center;">Frequently Asked Questions</h2>
+        <div style="margin-bottom: 2rem;">
+            <h3 style="color: #00d4ff; margin-bottom: 1rem;">How do I open an account?</h3>
+            <p style="line-height: 1.6;">Simply click the "Sign Up" button, fill in your details, and your account will be ready in minutes.</p>
+        </div>
+        <div style="margin-bottom: 2rem;">
+            <h3 style="color: #00d4ff; margin-bottom: 1rem;">Are international transfers instant?</h3>
+            <p style="line-height: 1.6;">Most international transfers are processed within 24 hours, though some may take up to 3 business days depending on the destination country.</p>
+        </div>
+        <div style="margin-bottom: 2rem;">
+            <h3 style="color: #00d4ff; margin-bottom: 1rem;">Is my money safe?</h3>
+            <p style="line-height: 1.6;">Yes, all deposits are insured up to $250,000 per account through our global banking partners.</p>
+        </div>
+        <div style="margin-bottom: 2rem;">
+            <h3 style="color: #00d4ff; margin-bottom: 1rem;">How can I contact support?</h3>
+            <p style="line-height: 1.6;">You can reach our 24/7 support team via phone, email, or through the support widget available on every page. We're here to help!</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contactSection" class="hidden" style="padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; color: white;">
+        <h2 style="font-size: 3rem; margin-bottom: 2rem; text-align: center;">Contact Us</h2>
+        <div style="text-align: center; font-size: 1.2rem; line-height: 2;">
+            <p>📧 Email: <a href="mailto:support@globalbank.com" style="color: #00d4ff; text-decoration: none;">support@globalbank.com</a></p>
+            <p>📞 Phone: <a href="tel:+18001234567" style="color: #00d4ff; text-decoration: none;">+1 (800) 123-4567</a></p>
+            <p>📍 Address: 123 Banking Plaza, New York, NY 10001</p>
+            <p>🕒 Hours: 24/7 Customer Support</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="dashboard">
+        <div class="dashboard-header">
+            <h2 id="dashboardGreeting">Welcome to Your Dashboard</h2>
+            <div class="dashboard-date" id="dashboardDate"></div>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>💰 Account Balance</h3>
+                <div class="balance-amount" id="accountBalance">$0.00</div>
+                <div class="balance-label">Available Balance</div>
+                <button class="btn-action" onclick="showDepositModal()">Deposit Funds</button>
+            </div>
+            <div class="dashboard-card">
+                <h3>💸 Send Money</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Transfer funds locally or internationally</p>
+                <button class="btn-action" onclick="showTransferModal()">Local Transfer</button>
+                <button class="btn-action" onclick="showInternationalTransferModal()">International Transfer</button>
+            </div>
+            <div class="dashboard-card">
+                <h3>🏧 Withdraw</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Withdraw cash from your account</p>
+                <button class="btn-action" onclick="showWithdrawModal()">Withdraw</button>
+            </div>
+            <div class="dashboard-card">
+                <h3>📚 Quick Links</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Access important information</p>
+                <button class="btn-action" onclick="showAbout()">About Us</button>
+                <button class="btn-action" onclick="showFAQ()">FAQ</button>
+                <button class="btn-action" onclick="openSupportWidget()">Contact Support</button>
+            </div>
+            <div class="dashboard-card">
+                <h3>🔐 Account Settings</h3>
+                <p style="color: #666; margin-bottom: 1rem;">Manage your account</p>
+                <button class="btn-action btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeLoginModal()">&times;</span>
+            <h2>Login to Global Bank</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+            </form>
+            <div style="text-align: center; margin-top: 1.5rem; color: #666;">
+                Don't have an account? <a onclick="switchToSignup()" style="color: #00d4ff; cursor: pointer; font-weight: bold;">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeSignupModal()">&times;</span>
+            <h2>Create Your Account</h2>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+            <div style="text-align: center; margin-top: 1.5rem; color: #666;">
+                Already have an account? <a onclick="switchToLogin()" style="color: #00d4ff; cursor: pointer; font-weight: bold;">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        // Initialize
+        window.addEventListener('load', function() {
+            const saved = localStorage.getItem('bj_logged_in');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                showDashboard();
+            }
+            updateDate();
+        });
+
+        function updateDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dashboardDate').textContent = date.toLocaleDateString('en-US', options);
+        }
+
+        // Database Functions
+        function getUsersDB() {
+            return JSON.parse(localStorage.getItem('bj_users') || '{}');
+        }
+
+        function saveUsersDB(users) {
+            localStorage.setItem('bj_users', JSON.stringify(users));
+        }
+
+        // Support Widget Functions
+        function toggleSupportWidget() {
+            const widget = document.getElementById('supportWidget');
+            widget.classList.toggle('active');
+        }
+
+        function openSupportWidget() {
+            const widget = document.getElementById('supportWidget');
+            widget.classList.add('active');
+        }
+
+        function closeSupportWidget() {
+            const widget = document.getElementById('supportWidget');
+            widget.classList.remove('active');
+        }
+
+        function showContactForm() {
+            closeSupportWidget();
+            document.getElementById('contactFormModal').classList.add('active');
+        }
+
+        function closeContactForm() {
+            document.getElementById('contactFormModal').classList.remove('active');
+            document.getElementById('contactFormModal').querySelector('form').reset();
+        }
+
+        function showContactInfo() {
+            closeSupportWidget();
+            document.getElementById('contactInfoModal').classList.add('active');
+        }
+
+        function closeContactInfo() {
+            document.getElementById('contactInfoModal').classList.remove('active');
+        }
+
+        function handleContactForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+
+            // Store message (in real app, send to server)
+            const messages = JSON.parse(localStorage.getItem('bj_messages') || '[]');
+            messages.push({
+                name,
+                email,
+                subject,
+                message,
+                timestamp: new Date().toLocaleString()
+            });
+            localStorage.setItem('bj_messages', JSON.stringify(messages));
+
+            alert('✅ Thank you! Your message has been sent. Our support team will respond within 24 hours.');
+            closeContactForm();
+        }
+
+        function callSupport() {
+            closeSupportWidget();
+            showContactInfo();
+        }
+
+        function emailSupport() {
+            closeSupportWidget();
+            showContactInfo();
+        }
+
+        // Modal Functions
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('loginForm').reset();
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function showSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+            document.getElementById('signupForm').reset();
+        }
+
+        function closeSignupModal() {
+            document.getElementById('signupModal').style.display = 'none';
+        }
+
+        function switchToLogin() {
+            closeSignupModal();
+            showLoginModal();
+        }
+
+        function switchToSignup() {
+            closeLoginModal();
+            showSignupModal();
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const users = getUsersDB();
+            if (!users[email] || users[email].password !== password) {
+                alert('❌ Invalid email or password');
+                return;
+            }
+
+            currentUser = users[email];
+            localStorage.setItem('bj_logged_in', JSON.stringify(currentUser));
+            closeLoginModal();
+            showDashboard();
+        }
+
+        // Handle Signup
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            const users = getUsersDB();
+            if (users[email]) {
+                alert('❌ Email already exists');
+                return;
+            }
+
+            users[email] = {
+                name,
+                email,
+                password,
+                balance: 1000.00,
+                createdDate: new Date().toLocaleDateString()
+            };
+
+            saveUsersDB(users);
+            alert('✅ Account created successfully! Logging you in...');
+            currentUser = users[email];
+            localStorage.setItem('bj_logged_in', JSON.stringify(currentUser));
+            closeSignupModal();
+            showDashboard();
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            document.getElementById('homeSection').classList.add('hidden');
+            document.getElementById('aboutSection').classList.add('hidden');
+            document.getElementById('faqSection').classList.add('hidden');
+            document.getElementById('contactSection').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('active');
+
+            document.getElementById('logoutNav').classList.remove('hidden');
+            
+            // Update mobile menu for logged in state
+            document.getElementById('mobileNavPublic').classList.add('hidden');
+            document.getElementById('mobileNavPrivate').classList.remove('hidden');
+            document.getElementById('mobileNavButtons').classList.add('hidden');
+
+            document.querySelector('.nav-buttons').innerHTML = '';
+
+            updateDashboard();
+        }
+
+        // Update Dashboard
+        function updateDashboard() {
+            const greeting = document.getElementById('dashboardGreeting');
+            const accountBalance = document.getElementById('accountBalance');
+            
+            const now = new Date();
+            const hour = now.getHours();
+            const timeOfDay = hour < 12 ? 'Morning' : hour < 18 ? 'Afternoon' : 'Evening';
+
+            greeting.textContent = `Good ${timeOfDay}, ${currentUser.name}`;
+            accountBalance.textContent = `$${currentUser.balance.toFixed(2)}`;
+        }
+
+        // Show Home
+        function showHome() {
+            if (currentUser) return;
+            document.getElementById('homeSection').classList.remove('hidden');
+            document.getElementById('aboutSection').classList.add('hidden');
+            document.getElementById('faqSection').classList.add('hidden');
+            document.getElementById('contactSection').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('active');
+        }
+
+        // Show About
+        function showAbout() {
+            if (currentUser) {
+                document.getElementById('homeSection').classList.add('hidden');
+                document.getElementById('aboutSection').classList.remove('hidden');
+                document.getElementById('faqSection').classList.add('hidden');
+                document.getElementById('contactSection').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('active');
+                return;
+            }
+            document.getElementById('homeSection').classList.add('hidden');
+            document.getElementById('aboutSection').classList.remove('hidden');
+            document.getElementById('faqSection').classList.add('hidden');
+            document.getElementById('contactSection').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('active');
+        }
+
+        // Show FAQ
+        function showFAQ() {
+            if (currentUser) {
+                document.getElementById('homeSection').classList.add('hidden');
+                document.getElementById('aboutSection').classList.add('hidden');
+                document.getElementById('faqSection').classList.remove('hidden');
+                document.getElementById('contactSection').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('active');
+                return;
+            }
+            document.getElementById('homeSection').classList.add('hidden');
+            document.getElementById('aboutSection').classList.add('hidden');
+            document.getElementById('faqSection').classList.remove('hidden');
+            document.getElementById('contactSection').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('active');
+        }
+
+        // Show Contact
+        function showContact() {
+            if (currentUser) {
+                document.getElementById('homeSection').classList.add('hidden');
+                document.getElementById('aboutSection').classList.add('hidden');
+                document.getElementById('faqSection').classList.add('hidden');
+                document.getElementById('contactSection').classList.remove('hidden');
+                document.getElementById('dashboard').classList.remove('active');
+                return;
+            }
+            document.getElementById('homeSection').classList.add('hidden');
+            document.getElementById('aboutSection').classList.add('hidden');
+            document.getElementById('faqSection').classList.add('hidden');
+            document.getElementById('contactSection').classList.remove('hidden');
+            document.getElementById('dashboard').classList.remove('active');
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(event.target) && mobileMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('bj_logged_in');
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('logoutNav').classList.add('hidden');
+            
+            // Update mobile menu for logged out state
+            document.getElementById('mobileNavPublic').classList.remove('hidden');
+            document.getElementById('mobileNavPrivate').classList.add('hidden');
+            document.getElementById('mobileNavButtons').classList.remove('hidden');
+
+            document.querySelector('.nav-buttons').innerHTML = '<button class="btn-login" onclick="showLoginModal()">Login</button><button class="btn-signup" onclick="showSignupModal()">Sign Up</button>';
+            showHome();
+        }
+
+        // Placeholder functions for dashboard actions
+        function showTransferModal() { alert('💸 Transfer modal would open here'); }
+        function showInternationalTransferModal() { alert('🌍 International transfer modal would open here'); }
+        function showDepositModal() { alert('💰 Deposit modal would open here'); }
+        function showWithdrawModal() { alert('🏧 Withdraw modal would open here'); }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            const contactFormModal = document.getElementById('contactFormModal');
+            const contactInfoModal = document.getElementById('contactInfoModal');
+            
+            if (event.target === loginModal) closeLoginModal();
+            if (event.target === signupModal) closeSignupModal();
+            if (event.target === contactFormModal) closeContactForm();
+            if (event.target === contactInfoModal) closeContactInfo();
+        };
+    </script>
+</body>
+</html>
