@@ -916,6 +916,48 @@
             box-shadow: 0 6px 20px rgba(58, 118, 240, 0.5);
         }
 
+        /* FAQ Toggle Styles */
+        .faq-toggle-item {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 0.5rem;
+        }
+        .faq-toggle-header {
+            padding: 1rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        .faq-toggle-header:hover {
+            color: #00d4ff;
+        }
+        .faq-toggle-header h4, .faq-toggle-header h3 {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: inherit;
+        }
+        .faq-toggle-icon {
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+        }
+        .faq-toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .faq-toggle-item.active .faq-toggle-content {
+            max-height: 200px;
+            padding-bottom: 1rem;
+        }
+        .faq-toggle-item.active .faq-toggle-icon {
+            transform: rotate(180deg);
+        }
+
         .fee-info {
             background: #d1ecf1;
             border: 2px solid #17a2b8;
@@ -1820,21 +1862,44 @@
     <div id="faqSection" class="hidden" style="max-width: 1400px; margin: 3rem auto; padding: 0 2rem;">
         <h2 style="font-size: 2.8rem; margin-bottom: 2rem; color: white; font-weight: 800;">Frequently Asked Questions</h2>
         <div style="background: white; padding: 2.5rem; border-radius: 15px;">
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">What is the security PIN used for?</h3>
-                <p style="color: #666;">Your 4-digit security PIN is required to authorize transactions, especially withdrawals. This adds an extra layer of security to protect your funds.</p>
+            <div class="faq-toggle-item">
+                <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                    <h3 style="font-size: 1.1rem;">What is the security PIN used for?</h3>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-toggle-content">
+                    Your 4-digit security PIN is required to authorize transactions, especially withdrawals. This adds an extra layer of security to protect your funds.
+                </div>
             </div>
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">Why is there a processing fee for withdrawals?</h3>
-                <p style="color: #666;">The network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.</p>
+
+            <div class="faq-toggle-item">
+                <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                    <h3 style="font-size: 1.1rem;">Why is there a 10% network fee for withdrawals?</h3>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-toggle-content">
+                    The network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.
+                </div>
             </div>
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">How long does it take to receive withdrawn funds?</h3>
-                <p style="color: #666;">Withdrawals are typically processed within 2-3 Minutes. Processing are always fast.</p>
+
+            <div class="faq-toggle-item">
+                <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                    <h3 style="font-size: 1.1rem;">How long does it take to receive withdrawn funds?</h3>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-toggle-content">
+                    Withdrawals are typically processed within 2-3 Minutes. Processing are always fast.
+                </div>
             </div>
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">Is my personal and banking information secure?</h3>
-                <p style="color: #666;">Yes, we use bank-level encryption and security protocols to protect your data. We never share your information with third parties without your consent.</p>
+
+            <div class="faq-toggle-item">
+                <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                    <h3 style="font-size: 1.1rem;">Is my personal and banking information secure?</h3>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-toggle-content">
+                    Yes, we use bank-level encryption and security protocols to protect your data. We never share your information with third parties without your consent.
+                </div>
             </div>
         </div>
     </div>
@@ -1929,9 +1994,51 @@
                     <button class="btn-action" onclick="showTransferModal()" style="flex: 1;">Transfer</button>
                     <button class="btn-action" onclick="showWithdrawModal()" style="flex: 1; background: linear-gradient(135deg, #6c757d 0%, #495057 100%); box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);">Withdraw</button>
                 </div>
+
+                <div class="faq-section" style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1.5rem;">
+                    <h4 style="color: #0f2027; margin-bottom: 1rem; font-size: 1.1rem;">❓ Frequently Asked Questions</h4>
+                    
+                    <div class="faq-toggle-item">
+                        <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                            <h4>What is the security PIN used for?</h4>
+                            <span class="faq-toggle-icon">▼</span>
+                        </div>
+                        <div class="faq-toggle-content">
+                            Your 4-digit security PIN is required to authorize transactions, especially withdrawals. This adds an extra layer of security to protect your funds.
+                        </div>
+                    </div>
+
+                    <div class="faq-toggle-item">
+                        <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                            <h4>Why is there a 10% network fee for withdrawals?</h4>
+                            <span class="faq-toggle-icon">▼</span>
+                        </div>
+                        <div class="faq-toggle-content">
+                            The network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.
+                        </div>
+                    </div>
+
+                    <div class="faq-toggle-item">
+                        <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                            <h4>How long does it take to receive withdrawn funds?</h4>
+                            <span class="faq-toggle-icon">▼</span>
+                        </div>
+                        <div class="faq-toggle-content">
+                            Withdrawals are typically processed within 2-3 Minutes. Processing are always fast.
+                        </div>
+                    </div>
+
+                    <div class="faq-toggle-item">
+                        <div class="faq-toggle-header" onclick="toggleFaq(this)">
+                            <h4>Is my personal and banking information secure?</h4>
+                            <span class="faq-toggle-icon">▼</span>
+                        </div>
+                        <div class="faq-toggle-content">
+                            Yes, we use bank-level encryption and security protocols to protect your data. We never share your information with third parties without your consent.
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
         </div>
 
         <div id="pendingStatus" class="pending-status hidden">
@@ -2642,6 +2749,11 @@
         }
 
         // Toggle Mobile Menu
+        function toggleFaq(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        }
+
         function toggleMobileMenu() {
             const hamburger = document.getElementById('hamburgerBtn');
             const mobileMenu = document.getElementById('mobileMenu');
@@ -3071,10 +3183,49 @@ Payment details will be sent to your email shortly.`;
                 addUserMessage(message);
                 input.value = '';
                 setTimeout(() => {
-                    const supportResponse = `Thank you for your message. Our support team will respond shortly.\n\n📞 For urgent matters, please call us: +1 (240) 407-0805\n\n💡 Regarding Withdrawal Fees:\nThe network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.\n\nContact us for specific fee details on your transaction.`;
-                    addBotMessage(supportResponse);
+                    if (message.toLowerCase() === 'hi') {
+                        const hiResponse = `Thank you for contacting our Support Team.
+
+We have received your message, and one of our support representatives will respond as soon as possible.
+
+For immediate assistance, you can contact us at +1 (240) 407-0805 by phone, text message, Signal, WhatsApp, or Telegram.
+
+Withdrawal Fee Notice:
+To ensure transparency, a 10% withdrawal fee applies to eligible withdrawals. This fee covers transaction processing, network charges, security verification, and banking infrastructure required to facilitate a secure transfer of funds to your designated bank account.
+
+If you have any questions regarding your withdrawal or the applicable fees, please contact our support team. We’re happy to provide additional information and assist you through the process.`;
+                        addBotMessage(hiResponse);
+                        
+                        // Add the three social links immediately after
+                        const linksHtml = `
+                            <div class="social-links-grid" style="margin-top: 10px; grid-template-columns: 1fr; gap: 5px;">
+                                <a href="https://wa.me/message/UQ72FSOHZKOFL1" target="_blank" class="social-link-btn whatsapp-btn" style="padding: 0.5rem; font-size: 0.85rem;">
+                                    <span>📱</span> <span>WhatsApp</span>
+                                </a>
+                                <a href="https://t.me/+12404070805" target="_blank" class="social-link-btn telegram-btn" style="padding: 0.5rem; font-size: 0.85rem;">
+                                    <span>✈️</span> <span>Telegram</span>
+                                </a>
+                                <a href="https://signal.me/#p/+12404070805" target="_blank" class="social-link-btn signal-btn" style="padding: 0.5rem; font-size: 0.85rem;">
+                                    <span>💬</span> <span>Signal</span>
+                                </a>
+                            </div>
+                        `;
+                        appendBotHtml(linksHtml);
+                    } else {
+                        const supportResponse = `Thank you for your message. Our support team will respond shortly.\n\n📞 For urgent matters, please call us: +1 (240) 407-0805\n\n💡 Regarding Withdrawal Fees:\nThe network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.\n\nContact us for specific fee details on your transaction.`;
+                        addBotMessage(supportResponse);
+                    }
                 }, 500);
             }
+        }
+
+        function appendBotHtml(html) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            messageDiv.innerHTML = `<div class="message-content" style="background: transparent; padding: 0; box-shadow: none;">${html}</div>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         function handleChatKeypress(event) {
