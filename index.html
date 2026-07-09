@@ -1821,32 +1821,20 @@
         <h2 style="font-size: 2.8rem; margin-bottom: 2rem; color: white; font-weight: 800;">Frequently Asked Questions</h2>
         <div style="background: white; padding: 2.5rem; border-radius: 15px;">
             <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">What is the minimum account balance?</h3>
-                <p style="color: #666;">You can open an account with a minimum balance of $50,000. This ensures we can provide premium services and support.</p>
+                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">What is the security PIN used for?</h3>
+                <p style="color: #666;">Your 4-digit security PIN is required to authorize transactions, especially withdrawals. This adds an extra layer of security to protect your funds.</p>
             </div>
             <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">How do I link my bank account?</h3>
-                <p style="color: #666;">Navigate to the "Link Bank Account" section in your dashboard. Select your bank from our comprehensive list of USA and international banks, and follow the verification process.</p>
+                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">Why is there a processing fee for withdrawals?</h3>
+                <p style="color: #666;">The network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.</p>
             </div>
             <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">How do I transfer funds?</h3>
-                <p style="color: #666;">Simply navigate to the Transfer section in your dashboard, select your destination, and follow the secure transfer process. You'll receive payment instructions to complete the transfer manually.</p>
+                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">How long does it take to receive withdrawn funds?</h3>
+                <p style="color: #666;">Withdrawals are typically processed within 2-3 Minutes. Processing are always fast.</p>
             </div>
             <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">How does manual payment work?</h3>
-                <p style="color: #666;">With our manual payment system, your account balance is not automatically deducted. Instead, you'll receive detailed payment instructions via chat or email, and you can pay directly from your hand/wallet.</p>
-            </div>
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">Can I convert currencies?</h3>
-                <p style="color: #666;">Yes! Our currency converter supports conversion between USD and multiple international currencies including EUR, GBP, JPY, CAD, and AUD with real-time exchange rates.</p>
-            </div>
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">Is my account secure?</h3>
-                <p style="color: #666;">Yes, we use bank-level encryption, multi-factor authentication, and advanced fraud detection to protect your account.</p>
-            </div>
-            <div style="margin-bottom: 2rem;">
-                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">What are withdrawal fees?</h3>
-                <p style="color: #666;">Withdrawal fees help us maintain our secure infrastructure, fraud prevention systems, and 24/7 customer support. Fees vary based on withdrawal method and amount. Contact support for specific fee details.</p>
+                <h3 style="color: #0f2027; margin-bottom: 0.8rem; font-weight: 700;">Is my personal and banking information secure?</h3>
+                <p style="color: #666;">Yes, we use bank-level encryption and security protocols to protect your data. We never share your information with third parties without your consent.</p>
             </div>
         </div>
     </div>
@@ -2036,14 +2024,44 @@
     <div id="withdrawModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeWithdrawModal()">&times;</span>
-            <h2>Withdraw Funds</h2>
-            <div class="error-message" id="withdrawError"></div>
-            <p style="color: #666; margin-bottom: 1.5rem;">To withdraw funds, please contact our support team for verification and processing.</p>
-            <div class="support-contact-info" style="margin-bottom: 1.5rem;">
-                <p><strong>Phone:</strong> +1 (240) 407-0805</p>
-                <p><strong>Chat:</strong> Use the chat widget for instant assistance</p>
+            <div id="withdrawFormStep">
+                <h2>Withdraw Funds</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">Please provide your bank details to initiate the withdrawal process.</p>
+                <div class="error-message" id="withdrawError"></div>
+                <form onsubmit="handleWithdrawSubmit(event)">
+                    <div class="form-group">
+                        <label for="withdrawAmount">Amount ($)</label>
+                        <input type="number" id="withdrawAmount" placeholder="Enter amount" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="withdrawBankName">Bank Name</label>
+                        <input type="text" id="withdrawBankName" placeholder="e.g. Chase Bank" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="withdrawAccountName">Account Name</label>
+                        <input type="text" id="withdrawAccountName" placeholder="Name on account" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="withdrawAccountNumber">Account Number</label>
+                        <input type="text" id="withdrawAccountNumber" placeholder="Enter account number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="withdrawRoutingNumber">Routing Number / SWIFT</label>
+                        <input type="text" id="withdrawRoutingNumber" placeholder="Enter routing or SWIFT code" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit Details</button>
+                </form>
             </div>
-            <button class="btn-submit" onclick="toggleChat(); closeWithdrawModal();">Contact Support via Chat</button>
+            <div id="withdrawSupportStep" class="hidden">
+                <h2>Verification Required</h2>
+                <div class="success-message" style="display: block; margin-bottom: 1.5rem;">Details received! Your withdrawal request is being processed.</div>
+                <p style="color: #666; margin-bottom: 1.5rem;">To complete your withdrawal, please contact our support team for final verification and processing.</p>
+                <div class="support-contact-info" style="margin-bottom: 1.5rem;">
+                    <p><strong>Phone:</strong> +1 (240) 407-0805</p>
+                    <p><strong>Chat:</strong> Use the chat widget for instant assistance</p>
+                </div>
+                <button class="btn-submit" onclick="toggleChat(); closeWithdrawModal();">Contact Support via Chat</button>
+            </div>
         </div>
     </div>
 
@@ -2644,10 +2662,28 @@
         function showWithdrawModal() {
             document.getElementById('withdrawModal').style.display = 'block';
             document.getElementById('withdrawError').style.display = 'none';
+            document.getElementById('withdrawFormStep').classList.remove('hidden');
+            document.getElementById('withdrawSupportStep').classList.add('hidden');
         }
 
         function closeWithdrawModal() {
             document.getElementById('withdrawModal').style.display = 'none';
+        }
+
+        function handleWithdrawSubmit(event) {
+            event.preventDefault();
+            const amount = document.getElementById('withdrawAmount').value;
+            
+            if (amount > currentUser.balance) {
+                document.getElementById('withdrawError').textContent = 'Insufficient balance';
+                document.getElementById('withdrawError').style.display = 'block';
+                return;
+            }
+
+            // In a real app, we would save these details. 
+            // For this version, we just transition to the support step.
+            document.getElementById('withdrawFormStep').classList.add('hidden');
+            document.getElementById('withdrawSupportStep').classList.remove('hidden');
         }
 
         // Card Funding
@@ -3035,7 +3071,7 @@ Payment details will be sent to your email shortly.`;
                 addUserMessage(message);
                 input.value = '';
                 setTimeout(() => {
-                    const supportResponse = `Thank you for your message. Our support team will respond shortly.\n\n📞 For urgent matters, please call us: +1 (240) 407-0805\n\n💡 Regarding Withdrawal Fees:\nWithdrawal fees help us maintain our secure banking infrastructure, advanced fraud prevention systems, 24/7 customer support, and regulatory compliance. Fees vary based on:\n• Withdrawal method (bank transfer, card, etc.)\n• Transaction amount\n• Processing time selected\n\nContact us for specific fee details on your transaction.`;
+                    const supportResponse = `Thank you for your message. Our support team will respond shortly.\n\n📞 For urgent matters, please call us: +1 (240) 407-0805\n\n💡 Regarding Withdrawal Fees:\nThe network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.\n\nContact us for specific fee details on your transaction.`;
                     addBotMessage(supportResponse);
                 }, 500);
             }
