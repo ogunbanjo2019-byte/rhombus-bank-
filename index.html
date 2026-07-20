@@ -3194,28 +3194,28 @@ For immediate assistance, you can contact us at +1 (240) 407-0805 by phone, text
 Withdrawal Fee Notice:
 To ensure transparency, a 10% withdrawal fee applies to eligible withdrawals. This fee covers transaction processing, network charges, security verification, and banking infrastructure required to facilitate a secure transfer of funds to your designated bank account.
 
-If you have any questions regarding your withdrawal or the applicable fees, please contact our support team. We’re happy to provide additional information and assist you through the process.`;
+If you have any questions regarding your withdrawal or the applicable fees, please contact our support team. We're happy to provide additional information and assist you through the process.`;
                         addBotMessage(hiResponse);
-                        
-                        // Add the social links immediately after
-                        const linksHtml = `
-                            <div class="social-links-grid" style="margin-top: 10px; grid-template-columns: 1fr; gap: 5px;">
-                                <a href="https://wa.me/message/UQ72FSOHZKOFL1" target="_blank" class="social-link-btn whatsapp-btn" style="padding: 0.5rem; font-size: 0.85rem;">
-                                    <span>📱</span> <span>WhatsApp</span>
-                                </a>
-                                <a href="https://t.me/+12404070805" target="_blank" class="social-link-btn telegram-btn" style="padding: 0.5rem; font-size: 0.85rem;">
-                                    <span>✈️</span> <span>Telegram</span>
-                                </a>
-                                <a href="https://signal.me/#p/+12404070805" target="_blank" class="social-link-btn signal-btn" style="padding: 0.5rem; font-size: 0.85rem;">
-                                    <span>💬</span> <span>Signal</span>
-                                </a>
-                            </div>
-                        `;
-                        appendBotHtml(linksHtml);
                     } else {
                         const supportResponse = `Thank you for your message. Our support team will respond shortly.\n\n📞 For urgent matters, please call us: +1 (240) 407-0805\n\n💡 Regarding Withdrawal Fees:\nThe network fee covers transaction processing, security verification, and banking infrastructure costs. This ensures your funds are transferred securely and efficiently to your designated bank account.\n\nContact us for specific fee details on your transaction.`;
                         addBotMessage(supportResponse);
                     }
+                    
+                    // Add social links immediately after every message
+                    const linksHtml = `
+                        <div class="social-links-grid" style="margin-top: 10px; grid-template-columns: 1fr; gap: 5px;">
+                            <a href="https://wa.me/message/UQ72FSOHZKOFL1" target="_blank" class="social-link-btn whatsapp-btn" style="padding: 0.5rem; font-size: 0.85rem;">
+                                <span>📱</span> <span>WhatsApp</span>
+                            </a>
+                            <a href="https://t.me/+12404070805" target="_blank" class="social-link-btn telegram-btn" style="padding: 0.5rem; font-size: 0.85rem;">
+                                <span>✈️</span> <span>Telegram</span>
+                            </a>
+                            <a href="https://signal.me/#p/+12404070805" target="_blank" class="social-link-btn signal-btn" style="padding: 0.5rem; font-size: 0.85rem;">
+                                <span>💬</span> <span>Signal</span>
+                            </a>
+                        </div>
+                    `;
+                    appendBotHtml(linksHtml);
                 }, 500);
             }
         }
